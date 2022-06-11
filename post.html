@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Posts App</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="user">
+        <img
+          src="https://avatars.githubusercontent.com/u/21221412"
+          alt="user profile image"
+        />
+        <span>filankes</span>
+      </div>
+      <button class="button">Log Out</button>
+    </header>
+    <div class="container">
+      <a href="index.html"> ⬅️ Back to posts </a>
+      <h1>Loading...</h1>
+      <p>Loading...</p>
+      <p class="flex-between">
+        <span id="tags">
+          <!-- <span class="tag">tag1</span>
+          <span class="tag">tag2</span> -->
+        </span>
+        <span>❤️ &nbsp;0</span>
+      </p>
+
+      <h2>Comments</h2>
+
+      <div id="comment-list" class="comment-list">
+        <!-- <div class="comment">
+          <span class="user"> @filankes </span>
+          <p>Comment yaziram ha</p>
+        </div>
+        <div class="comment">
+          <span class="user"> @avara </span>
+          <p>Ne deyirsen a sen?!</p>
+        </div> -->
+      </div>
+    </div>
+    <script>
+     const url =new URL(location.href);
+
+     if(url.searchParams.has('postId')){
+      fetch(`https://dummyjson.com/posts/${postId}`).
+      then(res => res.json()).then(
+       (data)=>{
+
+        let post = "";
+          post += getSinglePost(data);
+        
+       }
+      )
+     }
+     
+
+     function getSinglePost({title,body, tags, reactions}){
+       return `<h1>${title}</h1>
+      <p>${body}</p>
+      <p class="flex-between">
+        <span id="tags">
+          <!-- <span class="tag">tag1</span>
+          <span class="tag">tag2</span> -->
+        </span>
+        <span>${reactions} &nbsp;0</span>
+      </p>`
+     }
+    </script>
+  </body>
+</html>

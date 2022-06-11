@@ -26,10 +26,10 @@ function getFetchRequest() {
     });
 }
 
-function getPostHTML({ title, body, tags, reactions }) {
+function getPostHTML({ id, title, body, tags, reactions }) {
   return `
     <div class="post">
-    <a href="post.html">
+    <a href="post.html?postId=${id}">
       <h4>${title}</h4>
     </a>
     <p>${body}</p>
