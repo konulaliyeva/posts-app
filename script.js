@@ -2,8 +2,9 @@ const postContainer = document.getElementById("container");
 const loadMoreBtn = document.getElementById("loadMoreBtn");
 let total = 0;
 let currentSkip = 0;
-let limit = 3;
+const LIMIT = 3;
 loadMoreBtn.addEventListener("click", () => {
+  currentSkip += LIMIT;
   if (currentSkip >= total) {
     loadMoreButton.hidden = true;
   } else {
@@ -12,8 +13,8 @@ loadMoreBtn.addEventListener("click", () => {
 });
 getFetchRequest(currentSkip);
 
-function getFetchRequest() {
-  fetch(`https://dummyjson.com/posts?limit=${limit}&skip=0`)
+function getFetchRequest(skip) {
+  fetch(`https://dummyjson.com/posts?limit=${LIMIT}&skip=${skip}`)
     .then((res) => res.json())
     .then((data) => {
       total = data.total;

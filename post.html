@@ -52,12 +52,10 @@
         fetch(`https://dummyjson.com/posts/${postId}`).
           then(res => res.json()).then(
             (data) => {
-              // console.log(data);
-              // // for (let post of data.posts) {
+              
                 let postHTML = "";
                 postHTML += getSinglePost(data);
 
-                // postContainer.innerHTML=postHTML;
                 postContainer.insertAdjacentHTML('afterbegin', postHTML);
                            
         fetch(`https://dummyjson.com/comments/${postId}`).then(res => res.json()).then((json)=>{
