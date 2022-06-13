@@ -28,6 +28,9 @@ function getFetchRequest(skip) {
 }
 
 function getPostHTML({ id, title, body, tags, reactions }) {
+  const tagsHtml = tags
+  .map((tag) => `<span class="tag">${tag}</span>`)
+  .join("");
   return `
     <div class="post">
     <a href="post.html?postId=${id}">
@@ -36,8 +39,7 @@ function getPostHTML({ id, title, body, tags, reactions }) {
     <p>${body}</p>
     <p class="footer">
       <span>
-        <span class="tag">${tags[1]}</span>
-        <span class="tag">${tags[2]}</span>
+       ${tagsHtml}
       </span>
       <span>❤️${reactions}</span>
     </p>

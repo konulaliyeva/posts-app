@@ -28,7 +28,7 @@
           <span class="tag">tag2</span>
         </span>
         <span>❤️ &nbsp;0</span>
-      </p> --> 
+      </p> -->
 
       <h2>Comments</h2>
 
@@ -43,56 +43,57 @@
         </div> -->
       </div>
     </div>
-    <script>     
-     const postContainer =   document.getElementById("container");
-     const commentListContainer = document.getElementById("comment_list");
-     const url = new URL(location.href);
+    <script>
+      const postContainer = document.getElementById("container");
+      const commentListContainer = document.getElementById("comment_list");
+      const url = new URL(location.href);
       const postId = url.searchParams.get("postId");
-      if (url.searchParams.has('postId')) {
-        fetch(`https://dummyjson.com/posts/${postId}`).
-          then(res => res.json()).then(
-            (data) => {
-              
-                let postHTML = "";
-                postHTML += getSinglePost(data);
+      if (url.searchParams.has("postId")) {
+        fetch(`https://dummyjson.com/posts/${postId}`)
+          .then((res) => res.json())
+          .then((data) => {
+            let postHTML = "";
+            postHTML += getSinglePost(data);
 
-                postContainer.insertAdjacentHTML('afterbegin', postHTML);
-                           
-        fetch(`https://dummyjson.com/comments/${postId}`).then(res => res.json()).then((json)=>{
+            postContainer.insertAdjacentHTML("afterbegin", postHTML);
 
-          let commentHTML="";
-            commentHTML += getComment(json);
-            console.log(json.comments)
+            fetch(`https://dummyjson.com/posts/${postId}/comments/`)
+              .then((res) => res.json())
+              .then((json) => {
+                let commentHTML = "";
 
-          
-          commentListContainer.innerHTML =commentHTML;
-        })  
+                json.comments.forEach((comment) => {
+                  commentHTML += getComment(comment);
+                });
 
-              }
-          )
+                commentListContainer.innerHTML = commentHTML;
+              });
+          });
       }
 
-     function getSinglePost({title, body, tags, reactions}){
-       return ` <a href="index.html"> ⬅️ Back to posts </a>
+      function getSinglePost({ title, body, tags, reactions }) {
+        const tagsHtml = tags
+          .map((tag) => `<span class="tag">${tag}</span>`)
+          .join("");
+
+        return ` <a href="index.html"> ⬅️ Back to posts </a>
        <h1>${title}</h1>
       <p>${body}</p>
       <p class="flex-between">
         <span id="tags">
-          <span class="tag">${tags[0]}</span>
-          <span class="tag">${tags[1]}</span>
-          <span class="tag">${tags[2]}</span>
+          ${tagsHtml}
 
         </span>
         <span>❤️ ${reactions}</span>
-      </p>`
-     }
+      </p>`;
+      }
 
-     function getComment({user, body}){
-       return ` <div class="comment">
-                 <span class="user"> @${user['username']}</span>
+      function getComment({ user, body }) {
+        return ` <div class="comment">
+                 <span class="user"> @${user["username"]}</span>
                  <p>${body}</p>
-               </div>`
-     }
+               </div>`;
+      }
     </script>
   </body>
 </html>
