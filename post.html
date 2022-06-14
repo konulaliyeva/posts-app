@@ -57,7 +57,7 @@
 
             postContainer.insertAdjacentHTML("afterbegin", postHTML);
 
-            fetch(`https://dummyjson.com/posts/${postId}/comments/`)
+            fetch(`https://dummyjson.com/posts/${postId}/comments`)
               .then((res) => res.json())
               .then((json) => {
                 let commentHTML = "";
